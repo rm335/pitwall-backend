@@ -22,7 +22,7 @@ class SourcesController extends BaseController
         $appConfig = new AppConfigController();
         
         if (!array_key_exists('x-f1-key', $headers)) { return false; }
-        if ($headers['x-f1-key'][0] == $appConfig->get('x-f1-key')) { return false; }
+        if ($headers['x-f1-key'][0] != $appConfig->get('x-f1-key')) { return false; }
 
         return true;
     }
