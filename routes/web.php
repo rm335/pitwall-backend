@@ -17,6 +17,7 @@ $router->get('/info', function () use ($router) {
     return $router->app->version();
 });
 
+$router->get('sources', 'SourcesController@getAvailable');
 
 $router->get('appconfig', 'AppConfigController@getAppConfig');
 

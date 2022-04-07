@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('icon_url');
             $table->integer('display_order');           
+            $table->boolean('is_national');           
         });
     }
 
