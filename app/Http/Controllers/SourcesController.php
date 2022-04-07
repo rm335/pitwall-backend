@@ -11,7 +11,7 @@ class SourcesController extends BaseController
 
     public $requestController;
 
-    public function __construct(){
+    public function __construct() {
        $this->requestController = new RequestController();
     }
 
