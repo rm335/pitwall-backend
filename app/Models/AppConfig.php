@@ -13,7 +13,7 @@ class AppConfig extends Model
         return self::get();
     }
 
-    static function get($key) {
+    static function getValueForKey($key) {
         return self::where('key', $key)->first();
     }
 }
