@@ -24,7 +24,7 @@ class RequestController extends BaseController
         $xMinimumAppBuildKey = "x-minimum-app-build";
         $xAppBuildKey = "x-app-build";
         if (!array_key_exists($xAppBuildKey, $headers)) { return; }
-        if (floatval($headers[$xAppBuildKey][0]) < floatval($this->get($xMinimumAppBuildKey))) { return; }
+        if (floatval($headers[$xAppBuildKey][0]) < floatval($appConfig->get($xMinimumAppBuildKey))) { return; }
 
         return true;
     }    
