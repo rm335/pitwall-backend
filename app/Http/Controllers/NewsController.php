@@ -21,10 +21,10 @@ class NewsController extends BaseController
 
         $headers = $request->headers->all();
 
-        if (array_key_exists('sources', $headers)) {
+        if (array_key_exists('x-app-sources', $headers)) {
 
-            $sources = explode(',', $headers['sources'][0]);
-            
+            $sources = explode(',', $headers['x-app-sources'][0]);
+
             if (!empty($sources[0])) {
                 return response()->json(News::getFromSources($sources));
             }
