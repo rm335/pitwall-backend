@@ -19,4 +19,4 @@ $router->get('/info', function () use ($router) {
 
 $router->get('sources', 'SourcesController@getAvailable');
 $router->get('appconfig', 'AppConfigController@getAvailable');
-
+$router->get('news', 'NewsController@getAvailable');
