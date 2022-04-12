@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('app_config', function (Blueprint $table) {
             $table->integer('id', true)->unsigned();
             $table->string('key');
-            $table->string('value');            
+            $table->string('value');   
+            $table->boolean('force_update'); 
+            $table->boolean('is_default_value');             
         });
     }
 

@@ -32,4 +32,15 @@ class NewsController extends BaseController
 
         return;
     }
+
+    public function readItem(Request $request) {
+
+        if(!$this->requestController->isValid($request)) { return; }
+
+        if (!empty($request->input('id'))) {
+            News::where('id', $request->input('id'))->increment('times_read', 1);
+        }
+
+        return response()->json(['success' => 'success'], 200);
+    }
 }
