@@ -94,7 +94,8 @@ class CalendarController extends BaseController
                 $start_nl = $start_nl->toDateTimeString();
 
                 if (strtolower($item->type) == "race") {
-                    $roundResponse[] = [                                                
+                    $roundResponse[] = [        
+                        "start_nl" => $start_nl,                                        
                         "start_end" => "{$start} - {$end} {$month}",
                         "start_end_hours" => "{$startQ} - {$startR}",                                                                  
                         "circuit" => $item->circuit_short_name,
