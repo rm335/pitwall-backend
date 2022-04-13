@@ -104,7 +104,7 @@ class CalendarController extends BaseController
                         "circuit_dark_img_url" => $item->circuit_dark_img_url,
                         "winner" => $item->winner,
                         "round" => $item->round,
-                        "rounds" => count($rounds),                        
+                        "rounds" => strval(count($rounds)),                        
                     ];
                 }
             }
