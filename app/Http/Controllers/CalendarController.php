@@ -15,10 +15,12 @@ class CalendarController extends BaseController
     public function __construct() {
        $this->requestController = new RequestController();
     }
-    
+
     public function getAvailable(Request $request) {
 
         if(!$this->requestController->isValid($request)) { return; }
+        
+        Carbon::setLocale('nl');
 
         $rounds = Calendar::getRaces();
         $response = [];
@@ -91,38 +93,38 @@ class CalendarController extends BaseController
 
                 $start_nl = $start_nl->toDateTimeString();
 
-                $roundResponse[] = [
-                    "is_dst" => $isDST,
-                    "gmt_offset" => intval($gmtOffset),
-                    "start_utc" => $item->start,
-                    "start_nl" => $start_nl,
-                    "start_end" => "{$start} - {$end} {$month}",
-                    "start_end_hours" => "{$startQ} - {$startR}",
-                    "status" => $item->status,
-                    "title" => $item->title,
-                    "location" => $item->location,
-                    "type" => $item->type,
-                    "circuit" => $item->circuit_short_name,
-                    "country" => $item->country,
-                    "country_flag_url" => $item->country_flag_url,
-                    "circuit_wiki_url" => $item->circuit_wiki_url,
-                    "circuit_light_img_url" => $item->circuit_light_img_url,
-                    "circuit_dark_img_url" => $item->circuit_dark_img_url,
-                    "winner" => $item->winner,
-                    "round" => $item->round,
-                    "rounds" => count($rounds),
-                    "created_at" => $item->created_at,
-                ];
+                if (strtolower($item->type) == "race") {
+                    $roundResponse[] = [                                                
+                        "start_end" => "{$start} - {$end} {$month}",
+                        "start_end_hours" => "{$startQ} - {$startR}",                                                                  
+                        "circuit" => $item->circuit_short_name,
+                        "country" => $item->country,
+                        "country_flag_url" => $item->country_flag_url,
+                        "circuit_light_img_url" => $item->circuit_light_img_url,
+                        "circuit_dark_img_url" => $item->circuit_dark_img_url,
+                        "winner" => $item->winner,
+                        "round" => $item->round,
+                        "rounds" => count($rounds),                        
+                    ];
+                }
             }
 
             $response[] = $roundResponse;
         }
 
-        if (count($response) == 0) {
+        $result = [];
+
+        foreach ($response as $item) {
+            if(count($item) > 0){
+                $result[] = $item[0];
+            }
+        }
+        
+        if (count($result) == 0) {
             return response()->json(["items_count" => 0], 204);
         }
 
-        return response()->json($response);
+        return response()->json($result);
     }
 
 }
