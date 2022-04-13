@@ -22,3 +22,5 @@ $router->get('appconfig', 'AppConfigController@getAvailable');
 
 $router->get('news', 'NewsController@getAvailable');
 $router->post('news/read', 'NewsController@readItem');
+
+$router->get('calendar', 'CalendarController@getAvailable');
